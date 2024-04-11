@@ -1,0 +1,13 @@
+#!/usr/bin/make -f
+
+%:
+	dh $@
+
+override_dh_strip:
+	dh_strip -X opt/diamond/3.13/modeltech/linuxloem/mgcld -X opt/diamond/3.13/modeltech/linuxloem/salt_mgls_asynch -X opt/diamond/3.13/modeltech/linuxloem/salt_msl32.so
+
+
+# Also helpful is `dpkg-buildpackage -us -uc -z1`, and `dpkg-buildpackage -us -uc -z1 -b`
+# Just for testing (to remove)
+override_dh_builddeb:
+	dh_builddeb -- -Znone

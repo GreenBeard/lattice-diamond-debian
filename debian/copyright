@@ -1,0 +1,9 @@
+Files: debian/*
+Copyright: 2024 Alexander Coffin
+License: All right reserved
+  All rights reserved by Alexander Coffin.
+
+Files: pkgcontents/* debian/lattice-license.txt
+Copyright: 2024 Lattice Semiconductor, and others.
+License: Lattice Diamond 3.13 Software Agreement
+  See the contents of the file in /usr/share/doc/lattice-diamond-3.13/lattice-license.txt
