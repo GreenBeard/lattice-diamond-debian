@@ -4,6 +4,6 @@ set -eu
 
 workdir="$1"
 
-cd "$1"
+cd "${workdir}"
 
-dpkg-buildpackage -us -uc -z1
+dpkg-buildpackage -b -us -uc -z1

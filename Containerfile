@@ -18,29 +18,48 @@ RUN /work/lattice-diamond-3.13-3.13.0/01_fix_rpath.py /work/lattice-diamond-3.13
 
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y \
   devscripts \
-  dpkg-dev \
-  libatk1.0-0 \
-  libc6 \
-  libgl1 \
-  libglib2.0-0 \
-  libgstreamer-plugins-base1.0-0 \
-  libgstreamer1.0-0 \
-  libice6 \
-  libpangoxft-1.0-0 \
-  libpulse-mainloop-glib0 \
-  libpulse0 \
-  libsm6 \
-  libsqlite3-0 \
-  libusb-0.1-4 \
-  libuuid1 \
-  libx11-6 \
-  libxau6 \
-  libxext6 \
-  libxi6 \
-  libxml2 \
-  libxrender1 \
-  libxss1 \
-  libxt6
+  dpkg-dev
+
+RUN DEBIAN_FRONTEND=noninteractive dpkg --add-architecture i386
+RUN DEBIAN_FRONTEND=noninteractive apt-get update
+
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y \
+  libatk1.0-0:amd64 \
+  libc6:amd64 \
+  libc6:i386 \
+  libgdk-pixbuf-2.0-0:amd64 \
+  libgl1:amd64 \
+  libglib2.0-0:amd64 \
+  libgstreamer-plugins-base1.0-0:amd64 \
+  libgstreamer1.0-0:amd64 \
+  libgtk2.0-0:amd64 \
+  libice6:amd64 \
+  libpango-1.0-0:amd64 \
+  libpangoxft-1.0-0:amd64 \
+  libpulse-mainloop-glib0:amd64 \
+  libpulse0:amd64 \
+  libsm6:amd64 \
+  libsqlite3-0:amd64 \
+  libusb-0.1-4:amd64 \
+  libuuid1:amd64 \
+  libx11-6:amd64 \
+  libx11-6:i386 \
+  libxau6:amd64 \
+  libxcb-shape0:amd64 \
+  libxcb-xinerama0:amd64 \
+  libxcb-xkb1:amd64 \
+  libxcomposite1:amd64 \
+  libxext6:amd64 \
+  libxext6:i386 \
+  libxft2:i386 \
+  libxi6:amd64 \
+  libxinerama1:amd64 \
+  libxml2:amd64 \
+  libxml2:i386 \
+  libxrender1:amd64 \
+  libxrender1:i386 \
+  libxss1:amd64 \
+  libxt6:amd64
 
 COPY ./02_build.sh /work/lattice-diamond-3.13-3.13.0/02_build.sh
 COPY ./debian /work/lattice-diamond-3.13-3.13.0/debian

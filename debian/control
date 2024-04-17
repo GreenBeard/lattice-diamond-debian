@@ -6,24 +6,10 @@ Homepage: https://www.latticesemi.com/latticediamond
 Standards-Version: 3.9.2
 
 Package: lattice-diamond-3.13
-Depends: bash, libatk1.0-0, libc6, libgl1, libglib2.0-0, libgstreamer-plugins-base1.0-0, libgstreamer1.0-0, libice6, libpangoxft-1.0-0, libpulse-mainloop-glib0, libpulse0, libsm6, libsqlite3-0, libusb-0.1-4, libuuid1, libx11-6, libxau6, libxext6, libxi6, libxml2, libxrender1, libxss1, libxt6, perl
+Depends: bash, ${shlibs:Depends}, ${perl:Depends}
 Architecture: amd64
 Description: Lattice Diamond 3.13.0
   A packaged version of
   https://www.latticesemi.com/view_document?document_id=54010 .
   .
-  Missing some dependencies such as:
-  .
-  These seem concerning:
-  .
-  libtiff.so.3 (usr/local/diamond/3.13/ispfpga/bin/lin64/libwx_gtk2-2.8.so.0)
-  .
-  python2
-  .
-  These do not seem concerning:
-  .
-  libpython2.6.so.1.0 (usr/local/diamond/3.13/modeltech/examples/UVM_Framework/UVMF_2019.1/templates/python/markupsafe/_speedups.so)
-  .
-  libumr3.so (usr/local/diamond/3.13/synpbase/linux_a_64/raw2fsdb)
-  .
-  libumrbus.so (usr/local/diamond/3.13/synpbase/linux_a_64/raw2fsdb)
+  The packaging is done on a best effort, and is probably missing dependencies.

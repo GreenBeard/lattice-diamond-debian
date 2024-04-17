@@ -1,11 +1,42 @@
 #!/usr/bin/make -f
 
+empty :=
+space := $(empty) #
+
+DH_STRIP_IGNORE_LIST := \
+  opt/diamond/3.13/modeltech/linuxloem/mgcld \
+  opt/diamond/3.13/modeltech/linuxloem/salt_mgls_asynch \
+  opt/diamond/3.13/modeltech/linuxloem/salt_msl32.so \
+# end of list
+DH_STRIP_IGNORE := $(patsubst %,-X%,$(DH_STRIP_IGNORE_LIST))
+
+# opt/diamond/3.13/ispfpga/bin/lin64/libwx_gtk2-2.8.so.0 is missing quite a few
+# dependencies, and if this turns out to be an issue rebuilding it is probably
+# the only option.
+#
+# opt/diamond/3.13/modeltech/examples/UVM_Framework/UVMF_2019.1/templates/python/markupsafe/_speedups.so
+# is probably used by nothing so whatever.
+DH_SHLIBDEPS_IGNORE_LIST := \
+  opt/diamond/3.13/ispfpga/bin/lin64/libwx_gtk2-2.8.so.0 \
+  opt/diamond/3.13/modeltech/examples/UVM_Framework/UVMF_2019.1/templates/python/markupsafe/_speedups.so \
+# end of list
+DH_SHLIBDEPS_IGNORE := $(patsubst %,-X%,$(DH_SHLIBDEPS_IGNORE_LIST))
+
+DH_SHLIBDEPS_EXTRA_LIBS_LIST := \
+  /opt/diamond/3.13/bin/lin64 \
+  /opt/diamond/3.13/ispfpga/bin/lin64 \
+  /opt/diamond/3.13/synpbase/linux_a_64/lib \
+# end of list
+DH_SHLIBDEPS_EXTRA_LIBS := -l$(subst $(space),:,$(strip $(DH_SHLIBDEPS_EXTRA_LIBS_LIST)))
+
 %:
 	dh $@
 
 override_dh_strip:
-	dh_strip -X opt/diamond/3.13/modeltech/linuxloem/mgcld -X opt/diamond/3.13/modeltech/linuxloem/salt_mgls_asynch -X opt/diamond/3.13/modeltech/linuxloem/salt_msl32.so
+	dh_strip $(DH_STRIP_IGNORE)
 
+override_dh_shlibdeps:
+	dh_shlibdeps $(DH_SHLIBDEPS_EXTRA_LIBS) $(DH_SHLIBDEPS_IGNORE) -- --ignore-missing-info
 
 # Also helpful is `dpkg-buildpackage -us -uc -z1`, and `dpkg-buildpackage -us -uc -z1 -b`
 # Just for testing (to remove)
