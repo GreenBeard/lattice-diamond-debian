@@ -14,7 +14,7 @@ COPY ./00_prep.sh /work/lattice-diamond-3.13-3.13.0/00_prep.sh
 RUN /work/lattice-diamond-3.13-3.13.0/00_prep.sh /work/lattice-diamond-3.13-3.13.0
 
 COPY ./01_fix_rpath.py /work/lattice-diamond-3.13-3.13.0/01_fix_rpath.py
-RUN /work/lattice-diamond-3.13-3.13.0/01_fix_rpath.py /work/lattice-diamond-3.13-3.13.0/pkgcontents
+RUN /work/lattice-diamond-3.13-3.13.0/01_fix_rpath.py /work/lattice-diamond-3.13-3.13.0
 
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y \
   devscripts \
@@ -24,6 +24,7 @@ RUN DEBIAN_FRONTEND=noninteractive dpkg --add-architecture i386
 RUN DEBIAN_FRONTEND=noninteractive apt-get update
 
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y \
+  binutils-i686-linux-gnu \
   libatk1.0-0:amd64 \
   libc6:amd64 \
   libc6:i386 \

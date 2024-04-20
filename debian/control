@@ -6,10 +6,25 @@ Homepage: https://www.latticesemi.com/latticediamond
 Standards-Version: 3.9.2
 
 Package: lattice-diamond-3.13
-Depends: bash, ${shlibs:Depends}, ${perl:Depends}
-Architecture: amd64
+Depends: lattice-diamond-3.13-amd64:amd64, lattice-diamond-3.13-i386:i386, lattice-diamond-3.13-common:all
+Architecture: all
 Description: Lattice Diamond 3.13.0
   A packaged version of
   https://www.latticesemi.com/view_document?document_id=54010 .
   .
   The packaging is done on a best effort, and is probably missing dependencies.
+
+Package: lattice-diamond-3.13-amd64
+Depends: ${shlibs:Depends}, lattice-diamond-3.13-common:all
+Architecture: amd64
+Description: Lattice Diamond 3.13.0 amd64 binaries
+
+Package: lattice-diamond-3.13-i386
+Depends: ${shlibs:Depends}, lattice-diamond-3.13-common:all
+Architecture: i386
+Description: Lattice Diamond 3.13.0 i386 binaries
+
+Package: lattice-diamond-3.13-common
+Depends: ${perl:Depends}
+Architecture: all
+Description: Lattice Diamond 3.13.0 non-binaries

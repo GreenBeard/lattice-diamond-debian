@@ -8,7 +8,7 @@ cd "${workdir}"
 echo "cfa787daee5690f16259c19794abdac5763c8cc14a1e8a968c55fdd1def629d2 ./diamond_3_13-base-56-2-x86_64-linux.rpm" | sha256sum -c -
 
 mkdir "pkgcontents"
-cd "pkgcontents"
+pushd "pkgcontents" >/dev/null
 
 rpm2cpio ../diamond_3_13-base-56-2-x86_64-linux.rpm | cpio -idm
 
@@ -33,3 +33,15 @@ done
 
 # Remove broken symlink
 rm ./usr/local/diamond/3.13/modeltech/linuxloem/VisualizerRls/bin/.debug
+# Remove 32-bit libz libraries that should use the distro's version, and are in
+# the 64 bit folder.
+rm ./usr/local/diamond/3.13/bin/lin64/libz.so
+rm ./usr/local/diamond/3.13/bin/lin64/libz.so.1
+
+popd >/dev/null
+
+mkdir opt
+mv -T pkgcontents/usr/local/diamond opt/diamond
+rmdir pkgcontents/usr/local
+rmdir pkgcontents/usr
+rmdir pkgcontents
